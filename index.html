@@ -155,7 +155,6 @@
   .bio {
     max-width: 56ch;
     color: var(--text-muted);
-    margin: 0 0 32px;
     font-size: 1rem;
   }
 
@@ -253,7 +252,7 @@
   .status.live { color: var(--accent-soft); border-color: var(--accent-soft); }
 
   .project p.desc {
-    margin: 10px 0 14px;
+    margin: 10px 0 15px;
     color: var(--text-muted);
     max-width: 60ch;
   }
@@ -262,7 +261,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
-    margin-bottom: 14px;
+    margin-bottom: 15px;
   }
   .tags span {
     font-size: 0.78rem;
@@ -285,17 +284,17 @@
     background: var(--panel);
     border: 1px solid var(--panel-border);
     border-radius: 10px;
-    padding: 44px 36px;
+    padding: 50px 40px;
   }
   .contact-panel p {
     color: var(--text-muted);
     max-width: 50ch;
-    margin: 0 0 26px;
+    margin: 0 0 25px;
   }
   .email-row {
     display: flex;
     align-items: center;
-    gap: 14px;
+    gap: 25px;
     flex-wrap: wrap;
   }
   .email-link {
@@ -318,7 +317,7 @@
   .copy-btn.copied { color: var(--accent-soft); border-color: var(--accent-soft); }
 
   footer {
-    padding: 40px 0 60px;
+    padding: 0 0 50px;
     color: var(--text-muted);
     font-size: 0.82rem;
   }
@@ -331,12 +330,35 @@
     .project .line-no { display: none; }
   }
 
+  /* Image settings */
   .responsive-img {
     width: 40%;
     max-width: 600px; /* won't grow bigger than this on large screens */
     height: auto;
     display: block;
-    margin: 0 auto; /* centers it, optional */
+    margin: 0 auto; /* centers it */
+  }
+
+  /* Bio toggle button */
+  .hidden {
+    display: none;
+  }
+  #bio-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 6px;
+    text-decoration: none;
+    border: 1px solid transparent;
+    background: var(--accent);
+    color: black;
+    cursor: pointer;
+    font-size: 0.95rem;
+    padding: 10px;
+    margin: 15px 0;
+  }
+  #bio-toggle:hover {
+    text-decoration: underline;
   }
 </style>
 </head>
@@ -369,10 +391,20 @@
         <img src="./Image of Me.jpeg" alt="Description of image" class="responsive-img"> <br>
         <p class="role mono"> Looking for a job in software development! </p>
         <p class="bio">
-          I work in software programming and I'm looking for my first full-time role.
+          I am currently looking for my first full-time role in software development.
           Below are a few projects I've made in the past or am currently working on —
           take a look, and reach out if you'd like to talk!
+          <div id="bio-extra" class="hidden">
+            <p>
+              I currently live in Woodland, California, which is in northern California near Sacramento & Davis.
+              I graduated from California Baptist University (Riverside, CA) in 2024 with a B.S. in Computer Science
+              and a minor in Software Engineering. While I do not yet have a full-time job, I have taken up various
+              part-time/internship roles over the years, such as a data analysis internship at Syngenta Seeds, a global
+              agricultural technology program, and a customer & food service position on my college campus during my sophomore year.
+            </p>
+          </div>
         </p>
+        <button id="bio-toggle" onclick="toggleBio()"> Read More </button>
         <div class="hero-actions">
           <a class="btn primary" href="#projects"> View Projects </a>
           <a class="btn ghost" href="#contact"> Get In Touch </a>
@@ -456,7 +488,6 @@
         </div>
       </div>
     </div>
-
   </div>
 </section>
 
@@ -511,6 +542,15 @@
       // Clipboard API unavailable; mailto link still works.
     }
   });
+
+  function toggleBio() {
+    const extra = document.getElementById('bio-extra');
+    const button = document.getElementById('bio-toggle');
+    const isHidden = extra.classList.contains('hidden');
+
+    extra.classList.toggle('hidden');
+    button.textContent = isHidden ? 'Read less' : 'Read more';
+  }
 </script>
 </body>
 </html>
