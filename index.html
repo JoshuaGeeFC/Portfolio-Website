@@ -326,6 +326,14 @@
     .project { grid-template-columns: 1fr; }
     .project .line-no { display: none; }
   }
+
+  .responsive-img {
+    width: 40%;
+    max-width: 600px; /* won't grow bigger than this on large screens */
+    height: auto;
+    display: block;
+    margin: 0 auto; /* centers it, optional */
+  }
 </style>
 </head>
 <body>
@@ -354,6 +362,7 @@
       <div class="terminal-body">
         <p class="prompt-line mono"><span class="sym">$</span> whoami</p>
         <h1 class="name"> Joshua Gee <span class="cursor">&nbsp;</span></h1>
+        <img src="./Image of Me.jpeg" alt="Description of image" class="responsive-img"> <br>
         <p class="role mono"> Looking for a job in software development! </p>
         <p class="bio">
           I work in software programming and I'm looking for my first full-time role.
