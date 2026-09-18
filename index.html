@@ -360,6 +360,37 @@
   #bio-toggle:hover {
     text-decoration: underline;
   }
+
+  /* Fade-in transition */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  }
+
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Stagger the direct children of each section */
+  .fade-in > * {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+
+  .fade-in.visible > * {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Delay each successive child a bit more */
+  .fade-in.visible > *:nth-child(1) {transition-delay: 1s;}
+  .fade-in.visible > *:nth-child(2) {transition-delay: 1.5s;}
+  .fade-in.visible > *:nth-child(3) {transition-delay: 2s;}
+  .fade-in.visible > *:nth-child(4) {transition-delay: 2.5s;}
+  .fade-in.visible > *:nth-child(5) {transition-delay: 3s;}
 </style>
 </head>
 <body>
@@ -416,7 +447,7 @@
 
 <!-- Projects List -->
 <section id="projects">
-  <div class="wrap">
+  <div class="wrap fade-in">
     <div class="section-head">
       <span class="idx mono"> #1 </span>
       <h2> Projects </h2>
@@ -492,7 +523,7 @@
 </section>
 
 <!-- Contact -->
-<section id="contact">
+<section id="contact" class="fade-in">
   <div class="wrap">
     <div class="section-head">
       <span class="idx mono"> #2 </span>
@@ -551,6 +582,20 @@
     extra.classList.toggle('hidden');
     button.textContent = isHidden ? 'Read less' : 'Read more';
   }
+
+  const sections = document.querySelectorAll('.fade-in');
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, {
+    threshold: 0.15
+  });
+
+  sections.forEach(section => observer.observe(section));
 </script>
 </body>
 </html>
